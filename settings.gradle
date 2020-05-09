@@ -1,0 +1,2 @@
+rootProject.name='HomeAssigmentApplicaster'
+include ':app'
