@@ -2,8 +2,6 @@ package com.nelipa.homeassigment.applicaster.di.module
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nelipa.homeassigment.applicaster.storage.PostsRepository
-import com.nelipa.homeassigment.applicaster.storage.PostsRepositoryImpl
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module

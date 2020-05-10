@@ -16,11 +16,8 @@
 
 package com.nelipa.homeassigment.applicaster.storage.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.nelipa.homeassigment.applicaster.models.PostLinkEntry
+import androidx.room.*
+import com.nelipa.homeassigment.applicaster.models.PostEntry
 import com.nelipa.homeassigment.applicaster.utils.DatabaseConsts
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -37,7 +34,7 @@ interface PostsDao {
      * @return all links.
      */
     @Query("SELECT * FROM ${DatabaseConsts.TableName.POSTS_LINKS}")
-    fun gePostLinkEntries(): Observable<List<PostLinkEntry>>
+    fun gePostLinkEntries(): Observable<List<PostEntry>>
 
     /**
      * Insert a post link in the database. If the post already exists, replace it.
@@ -45,7 +42,27 @@ interface PostsDao {
      * @param post the link entry to be inserted.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPost(post: PostLinkEntry): Completable
+    fun insertPost(post: PostEntry): Completable
+
+
+    /**
+     * Insert a list of posts to database
+     *
+     * @param posts the list of posts.
+     */
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(posts: List<PostEntry>): Completable
+
+    /**
+     * Deletes all and then inserts all posts to database
+     *
+     * @param posts the list of posts.
+     */
+    @Transaction
+    fun rewrite(posts: List<PostEntry>) {
+        deletePostLink()
+        insertAll(posts)
+    }
 
     /**
      * Delete all post link entries.

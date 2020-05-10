@@ -2,7 +2,7 @@ package com.nelipa.homeassigment.applicaster.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.nelipa.homeassigment.applicaster.network.ApplicasterApi
+import com.nelipa.homeassigment.applicaster.storage.remote.ApplicasterApi
 import com.nelipa.homeassigment.applicaster.utils.ApiConsts
 import dagger.Module
 import dagger.Provides
@@ -18,7 +18,9 @@ import javax.inject.Singleton
 object NetworkModule {
     @JvmStatic
     @Provides
-    fun provideGson(): Gson = GsonBuilder().create()
+    fun provideGson(): Gson = GsonBuilder()
+        .setLenient()
+        .create()
 
     @JvmStatic
     @Provides
