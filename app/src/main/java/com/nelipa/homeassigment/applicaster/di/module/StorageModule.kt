@@ -2,11 +2,8 @@ package com.nelipa.homeassigment.applicaster.di.module
 
 import android.content.Context
 import androidx.room.Room
-import com.nelipa.homeassigment.applicaster.storage.PostsRepository
-import com.nelipa.homeassigment.applicaster.storage.PostsRepositoryImpl
 import com.nelipa.homeassigment.applicaster.storage.local.ApplicasterDatabase
 import com.nelipa.homeassigment.applicaster.utils.DatabaseConsts
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

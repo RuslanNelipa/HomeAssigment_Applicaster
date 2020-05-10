@@ -17,16 +17,16 @@ abstract class ViewModelBuilderModule {
 }
 
 @Target(
-    AnnotationTarget.FUNCTION,
-    AnnotationTarget.PROPERTY_GETTER,
-    AnnotationTarget.PROPERTY_SETTER
+        AnnotationTarget.FUNCTION,
+        AnnotationTarget.PROPERTY_GETTER,
+        AnnotationTarget.PROPERTY_SETTER
 )
 @Retention(AnnotationRetention.RUNTIME)
 @MapKey
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 class ApplicasterViewModelFactory @Inject constructor(
-    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
+        private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]

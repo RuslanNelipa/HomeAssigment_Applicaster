@@ -1,5 +1,6 @@
 package com.nelipa.homeassigment.applicaster.ui.posts
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.nelipa.homeassigment.applicaster.base.BaseViewModel
@@ -12,7 +13,8 @@ class PostsViewModel @Inject constructor(
     private val postsRepo: PostsRepository
 ) : BaseViewModel() {
 
-    private val loadingMutableLiveData = MutableLiveData<Boolean>()
+    val isLoading = ObservableBoolean(false)
+
     private val errorMutableLiveData = MutableLiveData<PostsError>()
     private val postsMutableLiveData = MutableLiveData<List<PostEntry>>()
 
@@ -21,12 +23,11 @@ class PostsViewModel @Inject constructor(
         observePosts()
     }
 
-    fun loadingLiveData(): LiveData<Boolean> = loadingMutableLiveData
     fun errorLiveData(): LiveData<PostsError> = errorMutableLiveData
     fun postsLiveData(): LiveData<List<PostEntry>> = postsMutableLiveData
 
     private fun loadPosts() = postsRepo.loadPosts()
-        .doOnSubscribe { loadingMutableLiveData.postValue(true) }
+        .doOnSubscribe { isLoading.set(true) }
         .subscribeBy(
             onError = {
                 errorMutableLiveData.postValue(PostsError.NetworkError("Failed to load posts. Please check you Internet Connection"))
@@ -37,7 +38,7 @@ class PostsViewModel @Inject constructor(
     private fun observePosts() = postsRepo.observeAllPosts()
         .subscribeBy(
             onNext = {
-                loadingMutableLiveData.postValue(false)
+                isLoading.set(false)
             },
             onError = {
                 errorMutableLiveData.postValue(PostsError.Unknown("Failed to retrieve data"))

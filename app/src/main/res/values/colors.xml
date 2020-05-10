@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">@color/flaxSmoke</color>
+    <color name="colorPrimaryDark">@color/limedSpruce</color>
+    <color name="colorAccent">@color/pearlBush</color>
+
+    <!--
+    Color Palette
+    https://color.romanuke.com/tsvetovaya-palitra-4191/
+    -->
+    <color name="white">#ffffff</color>
+    <color name="black">#0f1817</color>
+    <color name="limedSpruce">#394A4D</color>
+    <color name="gullGray">#9BACB6</color>
+    <color name="pearlBush">#E5DCD2</color>
+    <color name="flaxSmoke">#738156</color>
+
+    <color name="backgroundWhite">@color/white</color>
+    <color name="backgroundLight">@color/pearlBush</color>
+    <color name="textColorMain">@color/black</color>
+    <color name="shimmerColorPrimary">#e2e2e2</color>
+    <color name="shimmerColorSecondary">#4c4c4c</color>
+
+
 </resources>

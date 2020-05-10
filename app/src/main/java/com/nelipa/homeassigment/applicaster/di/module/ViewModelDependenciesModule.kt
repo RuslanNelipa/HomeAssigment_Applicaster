@@ -17,15 +17,15 @@ import dagger.Provides
 @Module(includes = [ManagersModule::class])
 object ViewModelDependenciesModule {
     @JvmStatic
-    @ActivityScope
     @Provides
+    @ActivityScope
     fun provideNetworkManager(api: ApplicasterApi, parser: PostsParser): NetworkManager {
         return NetworkManagerImpl(api, parser)
     }
 
     @JvmStatic
-    @ActivityScope
     @Provides
+    @ActivityScope
     fun providePostsRepository(networkManager: NetworkManager, postsDao: PostsDao): PostsRepository {
         return PostsRepositoryImpl(networkManager, postsDao)
     }
@@ -33,5 +33,7 @@ object ViewModelDependenciesModule {
 
 @Module
 abstract class ManagersModule {
-    @Binds internal abstract fun bindPostsParser(impl: PostsParserImpl): PostsParser
+    @Binds
+    @ActivityScope
+    internal abstract fun bindPostsParser(impl: PostsParserImpl): PostsParser
 }

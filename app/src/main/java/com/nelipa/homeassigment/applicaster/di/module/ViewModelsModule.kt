@@ -1,6 +1,7 @@
 package com.nelipa.homeassigment.applicaster.di.module
 
 import androidx.lifecycle.ViewModel
+import com.nelipa.homeassigment.applicaster.di.scope.FragmentScope
 import com.nelipa.homeassigment.applicaster.ui.posts.PostsViewModel
 import dagger.Binds
 import dagger.Module
@@ -12,5 +13,5 @@ abstract class ViewModelsModule {
     @Binds
     @IntoMap
     @ViewModelKey(PostsViewModel::class)
-    abstract fun bindLoginViewModel(vm: PostsViewModel): ViewModel
+    abstract fun bindPostsViewModel(vm: PostsViewModel): ViewModel
 }

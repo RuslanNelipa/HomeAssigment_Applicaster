@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dummyContent"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@color/backgroundWhite"
+    android:clickable="false"
+    android:focusable="false"
+    android:orientation="horizontal"
+    android:padding="@dimen/regular_margin_x2">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/firstDummyLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginBottom="@dimen/regular_margin_x1"
+        android:background="@color/shimmerColorPrimary"
+        android:enabled="false"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/shimmerColorSecondary"
+        android:textDirection="ltr"
+        app:layout_constraintBottom_toTopOf="@+id/secondDummyLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/secondDummyLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstDummyLine"
+        app:layout_constraintWidth_percent="0.9"
+        android:background="@color/shimmerColorPrimary"
+        android:enabled="false"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/shimmerColorSecondary"
+        android:textDirection="ltr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/firstDummyLine" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,34 +19,34 @@ object NetworkModule {
     @JvmStatic
     @Provides
     fun provideGson(): Gson = GsonBuilder()
-        .setLenient()
-        .create()
+            .setLenient()
+            .create()
 
     @JvmStatic
     @Provides
     fun provideApplicasterApi(retrofit: Retrofit): ApplicasterApi =
-        retrofit.create(ApplicasterApi::class.java)
+            retrofit.create(ApplicasterApi::class.java)
 
     @JvmStatic
     @Singleton
     @Provides
     fun provideApplicasterRetrofit(
-        okHttpClient: OkHttpClient,
-        rxAdapter: RxJava2CallAdapterFactory,
-        gson: Gson
+            okHttpClient: OkHttpClient,
+            rxAdapter: RxJava2CallAdapterFactory,
+            gson: Gson
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(ApiConsts.BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(okHttpClient)
-        .addCallAdapterFactory(rxAdapter)
-        .build()
+            .baseUrl(ApiConsts.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .client(okHttpClient)
+            .addCallAdapterFactory(rxAdapter)
+            .build()
 
     @JvmStatic
     @Provides
     fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build();
+            OkHttpClient.Builder()
+                    .addInterceptor(httpLoggingInterceptor)
+                    .build();
 
     @JvmStatic
     @Provides
@@ -57,5 +57,5 @@ object NetworkModule {
     @JvmStatic
     @Provides
     fun provideRxAdapter(): RxJava2CallAdapterFactory =
-        RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
+            RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io())
 }
