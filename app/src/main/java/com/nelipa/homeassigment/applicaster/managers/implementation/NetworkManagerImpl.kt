@@ -1,5 +1,7 @@
-package com.nelipa.homeassigment.applicaster.managers
+package com.nelipa.homeassigment.applicaster.managers.implementation
 
+import com.nelipa.homeassigment.applicaster.managers.contract.NetworkManager
+import com.nelipa.homeassigment.applicaster.managers.contract.PostsParser
 import com.nelipa.homeassigment.applicaster.storage.remote.ApplicasterApi
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

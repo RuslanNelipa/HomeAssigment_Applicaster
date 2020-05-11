@@ -16,8 +16,11 @@
     <color name="flaxSmoke">#738156</color>
 
     <color name="whiteTransparent">#D9ffffff</color>
+
     <color name="backgroundWhite">@color/white</color>
     <color name="backgroundLight">@color/pearlBush</color>
+    <color name="backgroundDark">@color/limedSpruce</color>
+
     <color name="textColorMain">@color/black</color>
     <color name="textColorSecondary">@color/limedSpruce</color>
     <color name="shimmerColorPrimary">#e2e2e2</color>

@@ -1,4 +1,4 @@
-package com.nelipa.homeassigment.applicaster.managers
+package com.nelipa.homeassigment.applicaster.managers.contract
 
 import com.google.gson.internal.LinkedTreeMap
 import com.nelipa.homeassigment.applicaster.models.PostEntry

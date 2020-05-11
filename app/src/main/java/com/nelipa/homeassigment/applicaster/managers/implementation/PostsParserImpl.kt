@@ -1,9 +1,10 @@
-package com.nelipa.homeassigment.applicaster.managers
+package com.nelipa.homeassigment.applicaster.managers.implementation
 
 import com.google.gson.internal.LinkedTreeMap
 import com.nelipa.homeassigment.applicaster.ext.firstOrNull
 import com.nelipa.homeassigment.applicaster.ext.forEach
 import com.nelipa.homeassigment.applicaster.ext.getStringOrNull
+import com.nelipa.homeassigment.applicaster.managers.contract.PostsParser
 import com.nelipa.homeassigment.applicaster.models.*
 import com.nelipa.homeassigment.applicaster.utils.DeserializeConsts
 import io.reactivex.Single
@@ -12,7 +13,8 @@ import org.json.JSONObject
 import java.util.*
 import javax.inject.Inject
 
-class PostsParserImpl @Inject constructor() : PostsParser {
+class PostsParserImpl @Inject constructor() :
+    PostsParser {
     override fun parsePosts(raw: LinkedTreeMap<String, Any>): Single<List<PostEntry>> {
         return Single.create { _emitter ->
             val result = mutableListOf<PostEntry>()

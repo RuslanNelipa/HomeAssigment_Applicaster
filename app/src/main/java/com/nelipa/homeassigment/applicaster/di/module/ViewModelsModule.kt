@@ -1,7 +1,6 @@
 package com.nelipa.homeassigment.applicaster.di.module
 
 import androidx.lifecycle.ViewModel
-import com.nelipa.homeassigment.applicaster.di.scope.FragmentScope
 import com.nelipa.homeassigment.applicaster.ui.posts.PostsViewModel
 import dagger.Binds
 import dagger.Module

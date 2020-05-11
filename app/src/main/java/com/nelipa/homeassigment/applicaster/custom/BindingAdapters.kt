@@ -3,9 +3,12 @@ package com.nelipa.homeassigment.applicaster.custom
 import android.view.View
 import android.webkit.URLUtil
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged
 import com.bumptech.glide.Glide
 import com.nelipa.homeassigment.applicaster.R
+
 
 @BindingAdapter("visibleOrGone")
 fun View.setVisibleOrGone(show: Boolean) {

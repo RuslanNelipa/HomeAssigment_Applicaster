@@ -1,7 +1,7 @@
 package com.nelipa.homeassigment.applicaster.storage
 
 import com.nelipa.homeassigment.applicaster.di.scope.AppScope
-import com.nelipa.homeassigment.applicaster.managers.NetworkManager
+import com.nelipa.homeassigment.applicaster.managers.contract.NetworkManager
 import com.nelipa.homeassigment.applicaster.models.PostEntry
 import com.nelipa.homeassigment.applicaster.storage.local.PostsDao
 import io.reactivex.Completable
@@ -12,8 +12,8 @@ import javax.inject.Inject
 
 @AppScope
 class PostsRepositoryImpl @Inject constructor(
-        private val networkManager: NetworkManager,
-        private val postsDao: PostsDao
+    private val networkManager: NetworkManager,
+    private val postsDao: PostsDao
 ) : PostsRepository {
 
     override fun loadPosts() = Singles.zip(
