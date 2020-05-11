@@ -4,4 +4,6 @@
 
     <dimen name="regular_margin_x1">8dp</dimen>
     <dimen name="regular_margin_x2">16dp</dimen>
+
+    <dimen name="post_preview_size">250dp</dimen>
 </resources>

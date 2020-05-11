@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import com.nelipa.homeassigment.applicaster.R
 import com.nelipa.homeassigment.applicaster.BR
 import com.nelipa.homeassigment.applicaster.base.BaseFragment
@@ -37,19 +39,20 @@ class PostsFragment : BaseFragment() {
     ) = FragmentPostsBinding.inflate(inflater).also {
         binding = it
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
     }.getRoot()
 
 
     private fun initRv() {
         binding.rvPosts.apply {
-            adapter = postsAdapter.apply { setHasStableIds(true) }
+            layoutManager = GridLayoutManager(context, 1)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
+            adapter = postsAdapter
         }
     }
 
     private fun observePosts() {
         viewModel.postsLiveData()
-            .observeData(viewLifecycleOwner) {
-//                postsAdapter.setItems(it)
-            }
+            .observeData(viewLifecycleOwner, postsAdapter::setItems)
     }
 }

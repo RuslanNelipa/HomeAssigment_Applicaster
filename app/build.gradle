@@ -52,7 +52,7 @@ dependencies {
     //Core
     implementation "androidx.core:core-ktx:$version_android_ktx"
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_ext"
-    kapt "com.android.databinding:compiler:$version_compiler"
+//    kapt "com.android.databinding:compiler:$version_compiler"
 
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"

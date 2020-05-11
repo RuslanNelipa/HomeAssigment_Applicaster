@@ -4,20 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.text.TextUtils" />
+
         <variable
             name="item"
             type="com.nelipa.homeassigment.applicaster.models.PostItem.PostLinkItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/backgroundLight"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        app:onClick="@{() -> item.linkItemClicked.invoke(item.postEntry)}">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Dummy link"
-            ></TextView>
+        <ImageView
+            android:id="@+id/ivPostPreview"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/post_preview_size"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:src_url="@{item.postEntry.getPreviewUrl()}"
+            tools:ignore="ContentDescription" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteTransparent"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:padding="@dimen/regular_margin_x1"
+            android:text="@{item.postEntry.title}"
+            android:textAppearance="?textAppearanceHeadline6"
+            android:textColor="@color/textColorMain"
+            app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivPostPreview"
+            app:layout_constraintVertical_bias="1.0"
+            app:visibleOrGone="@{!TextUtils.isEmpty(item.postEntry.title)}"
+            tools:text="Dummy title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvSubtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteTransparent"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:padding="@dimen/regular_margin_x1"
+            android:text="@{item.postEntry.summary}"
+            android:textAppearance="?textAppearanceBody2"
+            android:textColor="@color/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/ivPostPreview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ivPostPreview"
+            app:visibleOrGone="@{!TextUtils.isEmpty(item.postEntry.summary)}"
+            tools:text="Dummy subtitle" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

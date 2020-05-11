@@ -55,6 +55,7 @@ class PostsParserImpl @Inject constructor() : PostsParser {
                 else -> PostType.UNKNOWN
             }
         }
+        ?: PostType.UNKNOWN
 
     private fun JSONObject.parseMediaGroup() = getJSONArray(DeserializeConsts.MEDIA_GROUP)
         .firstOrNull()
