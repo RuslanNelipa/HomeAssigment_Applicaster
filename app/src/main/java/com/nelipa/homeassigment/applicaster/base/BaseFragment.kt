@@ -19,13 +19,17 @@ abstract class BaseFragment : Fragment(), HasAndroidInjector {
     @Inject
     open lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private var backClickedAction: (() -> Unit)? = null
+    private var backClickedAction: (() -> Boolean)? = null
 
     private val backClickCallback by lazy {
         object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                isEnabled = false
-                backClickedAction?.invoke() ?: activity?.onBackPressed()
+                val isHandled = backClickedAction?.invoke() ?: false
+
+                if (isEnabled && !isHandled) {
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
             }
         }
     }
@@ -35,12 +39,12 @@ abstract class BaseFragment : Fragment(), HasAndroidInjector {
         super.onAttach(context)
     }
 
-    fun overrideBackClick(onBackClickedAction: () -> Unit) = activity?.run {
+    override fun androidInjector(): AndroidInjector<Any> = androidInjector
+
+    fun overrideBackClick(onBackClickedAction: () -> Boolean) = activity?.run {
         backClickedAction = onBackClickedAction
         onBackPressedDispatcher.addCallback(this, backClickCallback)
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = androidInjector
 
     inline fun <reified VM : ViewModel> Fragment.viewModels() = viewModels<VM> { viewModelFactory }
 }

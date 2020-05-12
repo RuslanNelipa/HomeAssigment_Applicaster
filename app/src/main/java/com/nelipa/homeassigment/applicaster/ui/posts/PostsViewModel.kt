@@ -81,6 +81,7 @@ class PostsViewModel @Inject constructor(
 
     private fun getProperPostsObserver(query: String) = if (query.isEmpty())
         postsRepo.observeAllPosts()
+            .doOnNext { emptySearchResultsVisible.set(false) }
     else
         postsRepo.observePostsFilteredBy(query)
             .doOnNext { _items -> emptySearchResultsVisible.set(_items.isEmpty()) }

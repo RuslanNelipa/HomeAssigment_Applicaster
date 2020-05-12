@@ -77,7 +77,7 @@ class PostsFragment : BaseFragment() {
         binding.refreshPostsLayout.isRefreshing = isLoading
     }
 
-    private fun handleSwipeToRefresh(){
+    private fun handleSwipeToRefresh() {
         binding.refreshPostsLayout.setOnRefreshListener {
             snack?.dismiss()
             viewModel.refreshPosts()
@@ -85,10 +85,11 @@ class PostsFragment : BaseFragment() {
     }
 
     private fun handleBackClick() = overrideBackClick {
-        if (!binding.searchPostsToolbar.isSearchQueryEmpty()) {
+        return@overrideBackClick if (!binding.searchPostsToolbar.isSearchQueryEmpty()) {
             binding.searchPostsToolbar.clearSearchQuery()
+            true
         } else {
-            activity?.onBackPressed()
+            false //return false if back click not handled by fragment
         }
     }
 
