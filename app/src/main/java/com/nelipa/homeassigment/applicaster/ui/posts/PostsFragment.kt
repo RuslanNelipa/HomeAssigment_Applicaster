@@ -7,16 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.nelipa.homeassigment.applicaster.R
 import com.nelipa.homeassigment.applicaster.BR
+import com.nelipa.homeassigment.applicaster.R
 import com.nelipa.homeassigment.applicaster.base.BaseFragment
 import com.nelipa.homeassigment.applicaster.custom.MultiTypeListAdapter
 import com.nelipa.homeassigment.applicaster.databinding.FragmentPostsBinding
 import com.nelipa.homeassigment.applicaster.ext.observeData
 import com.nelipa.homeassigment.applicaster.ext.snack
+import com.nelipa.homeassigment.applicaster.models.PostEntry
 import com.nelipa.homeassigment.applicaster.models.PostItem
 import com.nelipa.homeassigment.applicaster.utils.Event
 import kotlin.reflect.KClass
@@ -62,7 +64,6 @@ class PostsFragment : BaseFragment() {
         binding.rvPosts.apply {
             layoutManager = GridLayoutManager(context, 1)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             adapter = postsAdapter
         }
     }
@@ -71,11 +72,20 @@ class PostsFragment : BaseFragment() {
         viewModel.postsLiveData().observeData(viewLifecycleOwner, ::onPostsReceived)
         viewModel.errorLiveData().observeData(viewLifecycleOwner, ::onErrorReceived)
         viewModel.isLoadingLiveData().observeData(viewLifecycleOwner, ::onLoadingStateChanged)
+        viewModel.linkPostClickedLiveData().observeData(viewLifecycleOwner, ::openInWebView)
+    }
+
+    private fun openInWebView(event: Event<PostEntry>) {
+        event.takeIf { it.hasBeenHandled.not() }
+            ?.getContentIfNotHandled()?.link
+            ?.let { PostsFragmentDirections.openLinkAction(it) }
+            ?.let { _destination -> findNavController().navigate(_destination) }
     }
 
     private fun onLoadingStateChanged(isLoading: Boolean) {
         binding.refreshPostsLayout.isRefreshing = isLoading
     }
+
 
     private fun handleSwipeToRefresh() {
         binding.refreshPostsLayout.setOnRefreshListener {
@@ -105,6 +115,8 @@ class PostsFragment : BaseFragment() {
                         snack?.dismiss()
                         viewModel.loadPosts()
                     }
+
+                    PostsViewModel.PostsError.InvalidUrl -> binding.root.snack(getString(R.string.invalid_url))
 
                     is PostsViewModel.PostsError.Generic -> binding.root.snack(_error.message)
                 }

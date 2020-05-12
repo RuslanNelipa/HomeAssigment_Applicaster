@@ -6,4 +6,5 @@
     <string name="failed_to_fetch_data">Failed to fetch data. Please retry</string>
     <string name="retry">Retry</string>
     <string name="no_search_results_by_this_query">Uh oh, no search results by this query…</string>
+    <string name="invalid_url">This post has invalid URL</string>
 </resources>

@@ -2,6 +2,7 @@ package com.nelipa.homeassigment.applicaster.custom
 
 import android.view.View
 import android.webkit.URLUtil
+import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -30,5 +31,12 @@ fun setImageUrl(view: ImageView, url: String?) {
 fun View.setOnClick(onClick: Runnable) {
     this.setOnClickListener {
         onClick.run()
+    }
+}
+
+@BindingAdapter("loadUrl")
+fun WebView.loadWebViewUrl(url: String) {
+    if (URLUtil.isValidUrl(url)) {
+        loadUrl(url)
     }
 }

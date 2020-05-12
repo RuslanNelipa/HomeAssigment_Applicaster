@@ -1,5 +1,6 @@
 package com.nelipa.homeassigment.applicaster.ui.posts
 
+import android.webkit.URLUtil
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -99,14 +100,19 @@ class PostsViewModel @Inject constructor(
         }
     }
 
-    private fun onPostLinkClicked(postLink: PostEntry) =
-        linkPostClickedMutableLiveData.postValue(Event(postLink))
+    private fun onPostLinkClicked(postLink: PostEntry) {
+        if (URLUtil.isValidUrl(postLink.link))
+            linkPostClickedMutableLiveData.value = Event(postLink)
+        else
+            errorMutableLiveData.value = Event(PostsError.InvalidUrl)
+    }
 
     private fun onPostVideoClicked(postLink: PostEntry) =
         videoPostClickedMutableLiveData.postValue(Event(postLink))
 
     sealed class PostsError {
         object NetworkError : PostsError()
+        object InvalidUrl : PostsError()
         class Generic(val message: String) : PostsError()
     }
 }

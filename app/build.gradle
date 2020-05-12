@@ -57,7 +57,7 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$version_navigation"
 
     //Dagger 2
     implementation "com.google.dagger:dagger:$version_dagger"
