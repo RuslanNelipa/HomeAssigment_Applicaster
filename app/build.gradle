@@ -99,6 +99,9 @@ dependencies {
     //Timber logging
     implementation "com.jakewharton.timber:timber:$version_timber"
 
+    //ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer:$version_exo_player"
+
     //Tests
     testImplementation "junit:junit:$version_junit"
     testImplementation "org.mockito:mockito-core:$version_test_mockito"

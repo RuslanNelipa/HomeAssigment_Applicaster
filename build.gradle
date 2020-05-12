@@ -26,6 +26,7 @@ buildscript {
         version_glide = '4.11.0'
         version_compiler = '3.6.3'
         version_swipe_refresh_layout = '1.0.0'
+        version_exo_player = '2.11.4'
     }
 
     repositories {

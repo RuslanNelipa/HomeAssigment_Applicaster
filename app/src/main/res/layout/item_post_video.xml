@@ -79,11 +79,11 @@
             android:layout_marginEnd="@dimen/regular_margin_x1"
             android:background="@drawable/shape_circle_white"
             android:padding="@dimen/regular_margin_x1"
-            android:src="@drawable/ic_video_black_24dp"
+            android:src="@drawable/ic_play"
             app:layout_constraintBottom_toTopOf="@id/tvTitle"
             app:layout_constraintEnd_toEndOf="@id/ivPostPreview"
-            app:layout_constraintTop_toTopOf="@id/ivPostPreview"
-            app:layout_constraintVertical_bias="0" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ivPostPreview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

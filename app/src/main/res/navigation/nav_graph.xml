@@ -13,6 +13,9 @@
         <action
             android:id="@+id/openLinkAction"
             app:destination="@id/linkPostDetailsFragment" />
+        <action
+            android:id="@+id/openVideoAction"
+            app:destination="@id/videoPostDetailsFragment" />
     </fragment>
 
     <fragment
@@ -24,6 +27,16 @@
             android:name="postUrl"
             app:argType="string" />
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoPostDetailsFragment"
+        android:name="com.nelipa.homeassigment.applicaster.ui.video.VideoPostDetailsFragment"
+        android:label="VideoPostDetailsFragment" >
+
+        <argument
+            android:name="videoUrl"
+            app:argType="string" />
     </fragment>
 
 </navigation>

@@ -73,6 +73,14 @@ class PostsFragment : BaseFragment() {
         viewModel.errorLiveData().observeData(viewLifecycleOwner, ::onErrorReceived)
         viewModel.isLoadingLiveData().observeData(viewLifecycleOwner, ::onLoadingStateChanged)
         viewModel.linkPostClickedLiveData().observeData(viewLifecycleOwner, ::openInWebView)
+        viewModel.videoPostClickedLiveData().observeData(viewLifecycleOwner, ::openInPlayer)
+    }
+
+    private fun openInPlayer(event: Event<PostEntry>) {
+        event.takeIf { it.hasBeenHandled.not() }
+            ?.getContentIfNotHandled()?.link
+            ?.let { PostsFragmentDirections.openVideoAction(it) }
+            ?.let { _destination -> findNavController().navigate(_destination) }
     }
 
     private fun openInWebView(event: Event<PostEntry>) {
@@ -116,7 +124,7 @@ class PostsFragment : BaseFragment() {
                         viewModel.loadPosts()
                     }
 
-                    PostsViewModel.PostsError.InvalidUrl -> binding.root.snack(getString(R.string.invalid_url))
+                    is PostsViewModel.PostsError.InvalidUrl -> binding.root.snack(getString(R.string.invalid_url_param, _error.url))
 
                     is PostsViewModel.PostsError.Generic -> binding.root.snack(_error.message)
                 }
@@ -132,12 +140,7 @@ class PostsFragment : BaseFragment() {
     private fun showToolbar() = ConstraintSet().apply {
         TransitionManager.beginDelayedTransition(binding.root, ChangeBounds())
         clone(binding.root)
-        connect(
-            binding.searchPostsToolbar.id,
-            ConstraintSet.TOP,
-            ConstraintSet.PARENT_ID,
-            ConstraintSet.TOP
-        )
+        connect(binding.searchPostsToolbar.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP)
         clear(binding.searchPostsToolbar.id, ConstraintSet.BOTTOM)
         applyTo(binding.root)
     }

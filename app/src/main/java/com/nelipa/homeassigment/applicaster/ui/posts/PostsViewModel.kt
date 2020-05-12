@@ -104,15 +104,19 @@ class PostsViewModel @Inject constructor(
         if (URLUtil.isValidUrl(postLink.link))
             linkPostClickedMutableLiveData.value = Event(postLink)
         else
-            errorMutableLiveData.value = Event(PostsError.InvalidUrl)
+            errorMutableLiveData.value = Event(PostsError.InvalidUrl(postLink.link))
     }
 
-    private fun onPostVideoClicked(postLink: PostEntry) =
-        videoPostClickedMutableLiveData.postValue(Event(postLink))
+    private fun onPostVideoClicked(postLink: PostEntry) {
+        if (URLUtil.isValidUrl(postLink.link))
+            videoPostClickedMutableLiveData.value = Event(postLink)
+        else
+            errorMutableLiveData.value = Event(PostsError.InvalidUrl(postLink.link))
+    }
 
     sealed class PostsError {
         object NetworkError : PostsError()
-        object InvalidUrl : PostsError()
+        class InvalidUrl(val url: String?) : PostsError()
         class Generic(val message: String) : PostsError()
     }
 }
