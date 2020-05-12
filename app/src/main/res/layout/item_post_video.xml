@@ -20,7 +20,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"
-        app:onClick="@{() -> item.videoItemClicked.invoke(item.postEntry)}">
+        app:onClickCallLambda="@{() -> item.videoItemClicked.invoke(item.postEntry)}">
 
         <ImageView
             android:id="@+id/ivPostPreview"

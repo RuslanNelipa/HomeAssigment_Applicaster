@@ -26,7 +26,7 @@ fun setImageUrl(view: ImageView, url: String?) {
     }
 }
 
-@BindingAdapter("onClick")
+@BindingAdapter("onClickCallLambda")
 fun View.setOnClick(onClick: Runnable) {
     this.setOnClickListener {
         onClick.run()

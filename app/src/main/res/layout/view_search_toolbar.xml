@@ -2,18 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="queryProvider"
-            type="com.nelipa.homeassigment.applicaster.managers.contract.SearchQueryProvider" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/backgroundDark">
+        android:background="@color/backgroundDark"
+        android:elevation="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etSearchQuery"
@@ -24,10 +18,9 @@
             android:layout_marginEnd="@dimen/regular_margin_x2"
             android:layout_marginBottom="@dimen/regular_margin_x1"
             android:ellipsize="end"
+            android:singleLine="true"
             android:hint="@string/search_query"
-            android:maxLines="1"
-            android:text="@={queryProvider.searchQuery}"
-            android:textColor="@color/textColorMain"
+            android:textColor="@color/textColorLight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/ivClearQuery"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,16 +30,16 @@
             android:id="@+id/ivClearQuery"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:background="?selectableItemBackgroundBorderless"
+            android:background="?selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> queryProvider.onQueryCleared()}"
-            android:paddingStart="@dimen/regular_margin_x1"
-            android:paddingEnd="@dimen/regular_margin_x1"
+            android:paddingStart="@dimen/regular_margin_x2"
+            android:paddingEnd="@dimen/regular_margin_x2"
             android:src="@drawable/ic_clear"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

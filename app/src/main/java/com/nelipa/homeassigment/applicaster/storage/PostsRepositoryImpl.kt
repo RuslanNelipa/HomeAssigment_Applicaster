@@ -17,17 +17,22 @@ class PostsRepositoryImpl @Inject constructor(
 ) : PostsRepository {
 
     override fun loadPosts() = Singles.zip(
-            networkManager.getLinks(),
-            networkManager.getVideos())
-            .flatMapCompletable { (_links, _videos) ->
-                Completable.concatArray(
-                        postsDao.insertAll(_links),
-                        postsDao.insertAll(_videos)
-                )
-            }
-            .subscribeOn(Schedulers.io())
+        networkManager.getLinks(),
+        networkManager.getVideos()
+    )
+        .flatMapCompletable { (_links, _videos) ->
+            Completable.concatArray(
+                postsDao.insertAll(_links),
+                postsDao.insertAll(_videos)
+            )
+        }
+        .subscribeOn(Schedulers.io())
 
-    override fun observeAllPosts(): Observable<List<PostEntry>> {
-        return postsDao.gePostLinkEntries()
-    }
+    override fun refreshPosts() = loadPosts()
+        .startWith(postsDao.deleteAllPosts())
+        .subscribeOn(Schedulers.io())
+
+    override fun observeAllPosts(): Observable<List<PostEntry>> = postsDao.getAllPostEntries()
+
+    override fun observePostsFilteredBy(query: String): Observable<List<PostEntry>> = postsDao.getPostsContaining("%$query%")
 }

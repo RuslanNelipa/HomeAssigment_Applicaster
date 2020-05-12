@@ -8,35 +8,42 @@ import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.widget.addTextChangedListener
 import androidx.transition.ChangeBounds
+import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.nelipa.homeassigment.applicaster.databinding.ViewSearchToolbarBinding
+import com.nelipa.homeassigment.applicaster.ext.onTransition
 import com.nelipa.homeassigment.applicaster.managers.contract.SearchQueryProvider
 
 class SearchPostsToolbar(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
+    var searchQueryProvider: SearchQueryProvider? = null
+
     private var lastToolbarState = ToolbarState.COLLAPSED
-    private var searchQueryProvider: SearchQueryProvider? = null
 
-    private val binding =
-        ViewSearchToolbarBinding.inflate(LayoutInflater.from(context), this, true).apply {
-            queryProvider = searchQueryProvider
-        }
-
-    fun setSearchQueryProvider(searchQueryProvider: SearchQueryProvider) {
-        this.searchQueryProvider = searchQueryProvider
-    }
+    private val binding = ViewSearchToolbarBinding.inflate(LayoutInflater.from(context), this, true)
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        expandToolbarByQuery()
+        observeSearchQuery()
+        handleClearClick()
     }
 
-    private fun expandToolbarByQuery(){
-        binding.etSearchQuery.addTextChangedListener { _editable ->
-            _editable?.length?.let { _length ->
-                if (_length > 0) expandToolbar() else collapseToolbar()
-            }
+    fun isSearchQueryEmpty() = binding.etSearchQuery.length() == 0
+
+    fun clearSearchQuery() =  binding.etSearchQuery.setText("")
+
+    private fun observeSearchQuery() = binding.etSearchQuery.addTextChangedListener { _editable ->
+        _editable?.toString()?.let {
+            searchQueryProvider?.searchQuery?.set(it)
         }
+
+        _editable?.length?.let { _length ->
+            if (_length > 0) expandToolbar() else collapseToolbar()
+        }
+    }
+
+    private fun handleClearClick() = binding.ivClearQuery.setOnClickListener {
+       clearSearchQuery()
     }
 
     private fun collapseToolbar() = ConstraintSet()
@@ -44,16 +51,11 @@ class SearchPostsToolbar(context: Context, attrs: AttributeSet?) : FrameLayout(c
         ?.apply {
             TransitionManager.beginDelayedTransition(binding.root, ChangeBounds().apply {
                 interpolator = OvershootInterpolator()
-                duration =
-                    context.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+                duration = context.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+                onTransition(onEnd = { binding.etSearchQuery.requestLayout() })
             })
             clone(binding.root)
-            connect(
-                binding.ivClearQuery.id,
-                ConstraintSet.START,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.END
-            )
+            connect(binding.ivClearQuery.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.END)
             clear(binding.ivClearQuery.id, ConstraintSet.END)
             applyTo(binding.root)
         }
@@ -64,17 +66,12 @@ class SearchPostsToolbar(context: Context, attrs: AttributeSet?) : FrameLayout(c
         ?.apply {
             TransitionManager.beginDelayedTransition(binding.root, ChangeBounds().apply {
                 interpolator = OvershootInterpolator()
-                duration =
-                    context.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+                duration = context.resources.getInteger(android.R.integer.config_mediumAnimTime).toLong()
+                onTransition(onEnd = { binding.etSearchQuery.requestLayout() })
             })
             clone(binding.root)
-            connect(
-                binding.ivClearQuery.id,
-                ConstraintSet.START,
-                ConstraintSet.PARENT_ID,
-                ConstraintSet.END
-            )
-            clear(binding.ivClearQuery.id, ConstraintSet.END)
+            connect(binding.ivClearQuery.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END)
+            clear(binding.ivClearQuery.id, ConstraintSet.START)
             applyTo(binding.root)
         }
         ?.also { lastToolbarState = ToolbarState.EXPANDED }
