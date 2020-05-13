@@ -12,7 +12,6 @@ import com.nelipa.homeassigment.applicaster.models.PostItem
 import com.nelipa.homeassigment.applicaster.models.PostType
 import com.nelipa.homeassigment.applicaster.storage.PostsRepository
 import com.nelipa.homeassigment.applicaster.utils.Event
-import com.nelipa.homeassigment.applicaster.utils.logd
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -34,7 +33,6 @@ class PostsViewModel @Inject constructor(
     init {
         loadPosts()
         observePosts()
-        observeSearchQuery()
     }
 
     fun errorLiveData(): LiveData<Event<PostsError>> = errorMutableLiveData
@@ -87,11 +85,6 @@ class PostsViewModel @Inject constructor(
         postsRepo.observePostsFilteredBy(query)
             .doOnNext { _items -> emptySearchResultsVisible.set(_items.isEmpty()) }
 
-    private fun observeSearchQuery() = searchQueryAdapter.observeSearchQuery()
-        .subscribeBy {
-            logd(it)
-        }
-
     private fun List<PostEntry>.toPostItems(): List<Any> = map { _postEntry ->
         when (_postEntry.type) {
             PostType.LINK -> PostItem.PostLinkItem(_postEntry, ::onPostLinkClicked)
@@ -108,7 +101,7 @@ class PostsViewModel @Inject constructor(
     }
 
     private fun onPostVideoClicked(postLink: PostEntry) {
-            videoPostClickedMutableLiveData.value = Event(postLink)
+        videoPostClickedMutableLiveData.value = Event(postLink)
     }
 
     sealed class PostsError {

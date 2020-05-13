@@ -4,10 +4,7 @@ import androidx.databinding.ObservableField
 import com.nelipa.homeassigment.applicaster.ext.onPropertyChanged
 import com.nelipa.homeassigment.applicaster.managers.contract.SearchQueryConsumer
 import com.nelipa.homeassigment.applicaster.managers.contract.SearchQueryProvider
-import com.nelipa.homeassigment.applicaster.utils.logd
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 

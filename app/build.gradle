@@ -107,6 +107,10 @@ dependencies {
     //Tests
     testImplementation "junit:junit:$version_junit"
     testImplementation "org.mockito:mockito-core:$version_test_mockito"
+    testImplementation "org.mockito:mockito-inline:$version_test_mockito_inline"
+    testImplementation "androidx.arch.core:core-testing:$version_core_testing"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$version_test_mockito_kotlin"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$version_test_mockito_kotlin"
     androidTestImplementation "androidx.test.ext:junit:$version_android_tests_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso"
     androidTestImplementation "org.mockito:mockito-core:$version_test_mockito"
