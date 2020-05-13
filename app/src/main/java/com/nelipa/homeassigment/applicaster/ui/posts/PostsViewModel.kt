@@ -13,6 +13,7 @@ import com.nelipa.homeassigment.applicaster.models.PostType
 import com.nelipa.homeassigment.applicaster.storage.PostsRepository
 import com.nelipa.homeassigment.applicaster.utils.Event
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
