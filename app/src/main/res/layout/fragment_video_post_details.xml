@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.exoplayer2.ui.PlayerView
-        android:id="@+id/playerPost"
+    <data>
+
+        <variable
+            name="isUrlValid"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="videoUrl"
+            type="String" />
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvInvalidUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="?selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:padding="@dimen/regular_margin_x2"
+            android:text="@{String.format(@string/invalid_url_try_this_instead_param, videoUrl)}"
+            android:textColor="@color/textColorLight"
+            app:visibleOrGone="@{!isUrlValid}" />
+
+    </FrameLayout>
 
 </layout>

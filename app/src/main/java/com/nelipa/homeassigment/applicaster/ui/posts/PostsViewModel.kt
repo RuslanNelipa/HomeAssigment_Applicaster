@@ -108,10 +108,7 @@ class PostsViewModel @Inject constructor(
     }
 
     private fun onPostVideoClicked(postLink: PostEntry) {
-        if (URLUtil.isValidUrl(postLink.link))
             videoPostClickedMutableLiveData.value = Event(postLink)
-        else
-            errorMutableLiveData.value = Event(PostsError.InvalidUrl(postLink.link))
     }
 
     sealed class PostsError {

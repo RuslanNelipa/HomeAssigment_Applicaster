@@ -101,6 +101,8 @@ dependencies {
 
     //ExoPlayer
     implementation "com.google.android.exoplayer:exoplayer:$version_exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$version_exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$version_exo_player"
 
     //Tests
     testImplementation "junit:junit:$version_junit"
