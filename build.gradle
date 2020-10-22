@@ -24,7 +24,7 @@ buildscript {
         version_lifecycle_ext = '2.2.0'
         version_facebook_shimmer = '0.5.0'
         version_glide = '4.11.0'
-        version_compiler = '3.6.3'
+        version_compiler = '4.1.0'
     }
 
     repositories {
