@@ -1,5 +1,12 @@
 <resources>
-    <string name="app_name">HomeAssigmentApplicaster</string>
+    <string name="app_name">Nelipa_HomeAssigmentApplicaster</string>
 
     <string name="search_query">Search for…</string>
+    <string name="unsupported_post_type">Unsupported post type :(</string>
+    <string name="failed_to_fetch_data">Failed to fetch data. Please retry</string>
+    <string name="retry">Retry</string>
+    <string name="no_search_results_by_this_query">Uh oh, no search results by this query…</string>
+    <string name="invalid_url_param">This post has invalid URL:\n%1$s</string>
+    <string name="invalid_url_try_this_instead_param">This post has invalid URL:\n%1$s\n\n<u>Click me to play valid video.</u></string>
+    <string name="valid_url_mp4">https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4</string>
 </resources>

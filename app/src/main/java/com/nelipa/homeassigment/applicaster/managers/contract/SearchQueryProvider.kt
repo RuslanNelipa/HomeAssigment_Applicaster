@@ -7,9 +7,4 @@ interface SearchQueryProvider {
      * Used for 2-way binding for search query
      * */
     val searchQuery: ObservableField<String>
-
-    /**
-     * Emits empty string
-     * */
-    fun onQueryCleared()
 }

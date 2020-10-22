@@ -4,9 +4,8 @@ import com.nelipa.homeassigment.applicaster.di.scope.ActivityScope
 import com.nelipa.homeassigment.applicaster.managers.contract.NetworkManager
 import com.nelipa.homeassigment.applicaster.managers.implementation.NetworkManagerImpl
 import com.nelipa.homeassigment.applicaster.managers.contract.PostsParser
-import com.nelipa.homeassigment.applicaster.managers.contract.SearchQueryProvider
 import com.nelipa.homeassigment.applicaster.managers.implementation.PostsParserImpl
-import com.nelipa.homeassigment.applicaster.managers.implementation.SearchQueryManagerImpl
+import com.nelipa.homeassigment.applicaster.managers.implementation.SearchQueryAdapter
 import com.nelipa.homeassigment.applicaster.storage.PostsRepository
 import com.nelipa.homeassigment.applicaster.storage.PostsRepositoryImpl
 import com.nelipa.homeassigment.applicaster.storage.local.PostsDao
@@ -33,6 +32,13 @@ object ViewModelDependenciesModule {
     fun providePostsRepository(networkManager: NetworkManager, postsDao: PostsDao): PostsRepository {
         return PostsRepositoryImpl(networkManager, postsDao)
     }
+
+    @JvmStatic
+    @Provides
+    @ActivityScope
+    fun provideSearchQueryAdapter(): SearchQueryAdapter {
+        return SearchQueryAdapter()
+    }
 }
 
 @Module
@@ -40,8 +46,4 @@ abstract class ManagersModule {
     @Binds
     @ActivityScope
     internal abstract fun bindPostsParser(impl: PostsParserImpl): PostsParser
-
-    @Binds
-    @ActivityScope
-    internal abstract fun bindSearchQueryProvider(impl: SearchQueryManagerImpl): SearchQueryProvider
 }

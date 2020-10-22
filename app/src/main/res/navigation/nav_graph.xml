@@ -9,6 +9,34 @@
         android:id="@+id/postsFragment"
         android:name="com.nelipa.homeassigment.applicaster.ui.posts.PostsFragment"
         android:label="Posts"
-        tools:layout="@layout/fragment_posts" />
+        tools:layout="@layout/fragment_posts">
+        <action
+            android:id="@+id/openLinkAction"
+            app:destination="@id/linkPostDetailsFragment" />
+        <action
+            android:id="@+id/openVideoAction"
+            app:destination="@id/videoPostDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/linkPostDetailsFragment"
+        android:name="com.nelipa.homeassigment.applicaster.ui.link.LinkPostDetailsFragment"
+        android:label="LinkPostDetailsFragment">
+
+        <argument
+            android:name="postUrl"
+            app:argType="string" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/videoPostDetailsFragment"
+        android:name="com.nelipa.homeassigment.applicaster.ui.video.VideoPostDetailsFragment"
+        android:label="VideoPostDetailsFragment" >
+
+        <argument
+            android:name="videoUrl"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

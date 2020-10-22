@@ -2,10 +2,9 @@ package com.nelipa.homeassigment.applicaster.custom
 
 import android.view.View
 import android.webkit.URLUtil
+import android.webkit.WebView
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged
 import com.bumptech.glide.Glide
 import com.nelipa.homeassigment.applicaster.R
 
@@ -26,9 +25,16 @@ fun setImageUrl(view: ImageView, url: String?) {
     }
 }
 
-@BindingAdapter("onClick")
+@BindingAdapter("onClickCallLambda")
 fun View.setOnClick(onClick: Runnable) {
     this.setOnClickListener {
         onClick.run()
+    }
+}
+
+@BindingAdapter("loadUrl")
+fun WebView.loadWebViewUrl(url: String) {
+    if (URLUtil.isValidUrl(url)) {
+        loadUrl(url)
     }
 }

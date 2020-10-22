@@ -39,13 +39,13 @@ class MultiTypeListAdapter(
         holder.binding.setVariable(itemId, items[position])
     }
 
-    fun setItems(items: List<Any>){
+    fun setItems(items: List<Any>) {
         autoNotifyAll(this.items, items)
         this.items.clear()
         this.items.addAll(items)
     }
 
-    fun clear(){
+    fun clear() {
         items.clear()
         notifyDataSetChanged()
     }

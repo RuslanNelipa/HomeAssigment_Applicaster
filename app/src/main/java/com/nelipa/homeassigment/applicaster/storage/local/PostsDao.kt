@@ -29,12 +29,20 @@ import io.reactivex.Observable
 interface PostsDao {
 
     /**
-     * Select all post links from the links table.
+     * Select all post from table.
      *
-     * @return all links.
+     * @return all links sorted alphabetically by title.
      */
-    @Query("SELECT * FROM ${DatabaseConsts.TableName.POSTS_LINKS}")
-    fun gePostLinkEntries(): Observable<List<PostEntry>>
+    @Query("SELECT * FROM ${DatabaseConsts.TableName.POSTS} ORDER by ${DatabaseConsts.ColumnName.TITLE} ASC")
+    fun getAllPostEntries(): Observable<List<PostEntry>>
+
+    /**
+     * Select filtered by query post from the table.
+     * @param query is keyword for filtering
+     * @return all posts filtered by query sorted alphabetically by title.
+     */
+    @Query("SELECT * FROM ${DatabaseConsts.TableName.POSTS} WHERE ${DatabaseConsts.ColumnName.TITLE} LIKE :query ORDER by ${DatabaseConsts.ColumnName.TITLE} ASC")
+    fun getPostsContaining(query: String): Observable<List<PostEntry>>
 
     /**
      * Insert a post link in the database. If the post already exists, replace it.
@@ -43,7 +51,6 @@ interface PostsDao {
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPost(post: PostEntry): Completable
-
 
     /**
      * Insert a list of posts to database
@@ -60,14 +67,13 @@ interface PostsDao {
      */
     @Transaction
     fun rewrite(posts: List<PostEntry>) {
-        deletePostLink()
+        deleteAllPosts()
         insertAll(posts)
     }
 
     /**
      * Delete all post link entries.
      */
-    @Query("DELETE FROM ${DatabaseConsts.TableName.POSTS_LINKS}")
-    fun deletePostLink()
-
+    @Query("DELETE FROM ${DatabaseConsts.TableName.POSTS}")
+    fun deleteAllPosts(): Completable
 }

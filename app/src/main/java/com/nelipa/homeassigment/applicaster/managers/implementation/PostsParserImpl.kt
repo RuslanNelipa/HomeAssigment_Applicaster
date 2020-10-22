@@ -13,14 +13,12 @@ import org.json.JSONObject
 import java.util.*
 import javax.inject.Inject
 
-class PostsParserImpl @Inject constructor() :
-    PostsParser {
+class PostsParserImpl @Inject constructor() : PostsParser {
     override fun parsePosts(raw: LinkedTreeMap<String, Any>): Single<List<PostEntry>> {
         return Single.create { _emitter ->
             val result = mutableListOf<PostEntry>()
             val entriesArray = JSONObject(raw).getJSONArray(DeserializeConsts.ENTRY)
             result.populateWithPosts(entriesArray)
-
             _emitter.onSuccess(result)
         }
     }
@@ -29,8 +27,7 @@ class PostsParserImpl @Inject constructor() :
         entriesArray.forEach { _entry ->
             add(
                 PostEntry(
-                    id = _entry.getStringOrNull(DeserializeConsts.ID) ?: UUID.randomUUID()
-                        .toString(),
+                    id = _entry.getStringOrNull(DeserializeConsts.ID) ?: UUID.randomUUID().toString(),
                     type = _entry.parseType(),
                     title = _entry.getStringOrNull(DeserializeConsts.TITLE),
                     summary = _entry.getStringOrNull(DeserializeConsts.SUMMARY),

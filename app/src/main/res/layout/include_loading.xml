@@ -18,7 +18,7 @@
         app:visibleOrGone="@{isVisible}"
         tools:visibility="visible">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/shimmerItems"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -27,64 +27,32 @@
             <include
                 android:id="@+id/shimmerRow1"
                 layout="@layout/include_empty_cell"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/regular_margin_x2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/post_preview_size"
+                android:layout_marginStart="@dimen/regular_margin_x1"
                 android:layout_marginTop="@dimen/regular_margin_x1"
-                android:layout_marginEnd="@dimen/regular_margin_x1"
-                android:layout_marginBottom="@dimen/regular_margin_x2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/shimmerRow2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shimmerRow3" />
+                android:layout_marginEnd="@dimen/regular_margin_x1" />
 
             <include
                 android:id="@+id/shimmerRow2"
                 layout="@layout/include_empty_cell"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/post_preview_size"
                 android:layout_marginStart="@dimen/regular_margin_x1"
                 android:layout_marginTop="@dimen/regular_margin_x1"
-                android:layout_marginEnd="@dimen/regular_margin_x2"
-                android:layout_marginBottom="@dimen/regular_margin_x2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/shimmerRow1"
-                app:layout_constraintTop_toBottomOf="@+id/shimmerRow4" />
+                android:layout_marginEnd="@dimen/regular_margin_x1"/>
 
             <include
                 android:id="@+id/shimmerRow3"
                 layout="@layout/include_empty_cell"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/regular_margin_x2"
-                android:layout_marginTop="@dimen/regular_margin_x2"
-                android:layout_marginEnd="@dimen/regular_margin_x1"
-                android:layout_marginBottom="@dimen/regular_margin_x1"
-                app:layout_constraintBottom_toTopOf="@+id/shimmerRow1"
-                app:layout_constraintEnd_toStartOf="@+id/shimmerRow4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include
-                android:id="@+id/shimmerRow4"
-                layout="@layout/include_empty_cell"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/post_preview_size"
                 android:layout_marginStart="@dimen/regular_margin_x1"
-                android:layout_marginTop="@dimen/regular_margin_x2"
-                android:layout_marginEnd="@dimen/regular_margin_x2"
-                android:layout_marginBottom="@dimen/regular_margin_x1"
-                app:layout_constraintBottom_toTopOf="@+id/shimmerRow2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/shimmerRow3"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="@dimen/regular_margin_x1"
+                android:layout_marginEnd="@dimen/regular_margin_x1"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 </layout>

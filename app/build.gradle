@@ -57,7 +57,7 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$version_navigation"
 
     //Dagger 2
     implementation "com.google.dagger:dagger:$version_dagger"
@@ -90,6 +90,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$version_glide"
     annotationProcessor "com.github.bumptech.glide:compiler:$version_glide"
     implementation "com.facebook.shimmer:shimmer:$version_facebook_shimmer"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$version_swipe_refresh_layout"
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
@@ -98,9 +99,18 @@ dependencies {
     //Timber logging
     implementation "com.jakewharton.timber:timber:$version_timber"
 
+    //ExoPlayer
+    implementation "com.google.android.exoplayer:exoplayer:$version_exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$version_exo_player"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$version_exo_player"
+
     //Tests
     testImplementation "junit:junit:$version_junit"
     testImplementation "org.mockito:mockito-core:$version_test_mockito"
+    testImplementation "org.mockito:mockito-inline:$version_test_mockito_inline"
+    testImplementation "androidx.arch.core:core-testing:$version_core_testing"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$version_test_mockito_kotlin"
+    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$version_test_mockito_kotlin"
     androidTestImplementation "androidx.test.ext:junit:$version_android_tests_ext"
     androidTestImplementation "androidx.test.espresso:espresso-core:$version_espresso"
     androidTestImplementation "org.mockito:mockito-core:$version_test_mockito"

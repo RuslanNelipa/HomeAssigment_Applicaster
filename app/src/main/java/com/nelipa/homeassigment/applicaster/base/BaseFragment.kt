@@ -2,7 +2,6 @@ package com.nelipa.homeassigment.applicaster.base
 
 import android.content.Context
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -13,33 +12,39 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import javax.inject.Inject
 
-abstract class BaseFragment: Fragment(), HasAndroidInjector {
+abstract class BaseFragment : Fragment(), HasAndroidInjector {
     @Inject
     lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     @Inject
     open lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onAttach(context: Context) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-        val callback = object : OnBackPressedCallback(true) {
+    private var backClickedAction: (() -> Boolean)? = null
+
+    private val backClickCallback by lazy {
+        object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val shouldKeepScreen = this@BaseFragment.handleOnBackPressed()
-                if (!shouldKeepScreen) {
+                val isHandled = backClickedAction?.invoke() ?: false
+
+                if (isEnabled && !isHandled) {
                     isEnabled = false
                     activity?.onBackPressed()
                 }
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-    open fun handleOnBackPressed(): Boolean {
-        return false
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     override fun androidInjector(): AndroidInjector<Any> = androidInjector
+
+    fun overrideBackClick(onBackClickedAction: () -> Boolean) = activity?.run {
+        backClickedAction = onBackClickedAction
+        onBackPressedDispatcher.addCallback(this, backClickCallback)
+    }
 
     inline fun <reified VM : ViewModel> Fragment.viewModels() = viewModels<VM> { viewModelFactory }
 }

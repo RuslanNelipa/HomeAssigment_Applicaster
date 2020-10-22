@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import com.nelipa.homeassigment.applicaster.utils.DatabaseConsts
 
 @Keep
-@Entity(tableName = DatabaseConsts.TableName.POSTS_LINKS)
+@Entity(tableName = DatabaseConsts.TableName.POSTS)
 data class PostEntry(
     @PrimaryKey @ColumnInfo(name = DatabaseConsts.ColumnName.ID) val id: String,
     @ColumnInfo(name = DatabaseConsts.ColumnName.TITLE) val title: String? = null,

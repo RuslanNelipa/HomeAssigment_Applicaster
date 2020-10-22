@@ -31,7 +31,7 @@ object DatabaseConsts {
     const val DATABASE_NAME = "applicaster.db"
 
     object TableName {
-        const val POSTS_LINKS = "table_posts_links"
+        const val POSTS = "table_posts"
     }
 
     object ColumnName {
